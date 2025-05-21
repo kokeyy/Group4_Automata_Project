@@ -122,6 +122,7 @@ dfa = DFA(states, alphabet, dfa_letter, start_state, accept_states)
 
 # --- Streamlit Interface ---
 st.html("<h1 style = 'text-align: center;'>2nd DFA Visualizer </h1>")
+st.html("<p> For Regular Expression: (a+b)* (aa+bb) (aa+bb)* (ab+ba+aba) (bab+aba+bbb) (a+b+bb+aa)* (bb+aa+aba) (aaa+bab+bba) (aaa+bab+bba)* </p>")
 
 active_color = st.color_picker("Pick a color for the active state highlight:", "#90ee90")
 edge_color = st.color_picker("Pick a color for the transition trail:", "#32CD32")
