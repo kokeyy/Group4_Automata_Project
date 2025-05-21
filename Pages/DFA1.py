@@ -2,7 +2,7 @@ import streamlit as st
 import graphviz
 import time
 import pathlib
-
+""""
 # Function to load CSS from the 'assets' folder
 def load_css(file_path):
     with open(file_path) as f:
@@ -14,6 +14,7 @@ load_css(css_path)
 
 if "dfa_history" not in st.session_state:
     st.session_state.dfa_history = []
+"""
 
 # --- DFA Class ---
 class DFA:
@@ -91,24 +92,24 @@ dfa_letter = {
     'q0':{'0':'q1','1':'q2'},
     'q1':{'1':'q3','0':'q5'},
     'q2':{'1':'q5','0':'q4'},
-    'q3':{'0,1':'q5'},
-    'q4':{'0,1':'q5'},
-    'q5':{'0,1':'q6'},
-    'q6':{'0,1':'q7'},
+    'q3':{'0':'q5', '1':'q5'},
+    'q4':{'0':'q5', '1':'q5'},
+    'q5':{'0':'q6','1': 'q6'},
+    'q6':{'0':'q7','1':'q7'},
     'q7':{'0':'q8','1':'q9'},
     'q8':{'0':'q10','1':'q9'},
     'q9':{'0':'q11','1':'q12' },
-    'q10':{'0,1':'q14'},
-    'q11':{'0,1':'q14'},
+    'q10':{'0':'q14','1':'q14'},
+    'q11':{'0':'q14','1':'q14'},
     'q12':{'0':'q13','1':'q14'},
     'q13':{'0':'q11','1':'q14'},
     'q14':{'0':'q15','1':'q16'},
     'q15':{'0':'q17','1':'q16'},
     'q16':{'1':'q18','0':'q19'},
-    'q17':{'0,1':'q20'},
-    'q18':{'0,1':'q20'},
-    'q19':{'0,1':'q20'},
-    'q20':{'0,1':'q20'}
+    'q17':{'0':'q20','1':'q20'},
+    'q18':{'0':'q20','1':'q20'},
+    'q19':{'0':'q20','1':'q20'},
+    'q20':{'0':'q20','1':'q20'}
 }
 states = set(dfa_letter.keys())
 alphabet = {'1', '2'}
@@ -156,12 +157,9 @@ st.subheader("Input History")
 
 for i, (inp, res) in enumerate(reversed(st.session_state.dfa_history), 1):
     st.markdown(f"**{i}.** `{inp}` → {res}")
+    
+if st.button("Clear History", key = 'pulse'):
+    st.session_state.dfa_history = []
 
-
-col1, col2, col3, col4, col5 = st.columns([1, 2, 1, 2, 1])
-with col2:
-    if st.button("Clear History", key = 'pulse'):
-        st.session_state.dfa_history = []
-with col4:
-    if st.button("Go back", key = 'pulse2'):
-        st.switch_page("Home.py")
+if st.button("Go back", key = 'pulse2'):
+    st.switch_page("Home.py")
