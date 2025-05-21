@@ -156,9 +156,12 @@ st.subheader("Input History")
 
 for i, (inp, res) in enumerate(reversed(st.session_state.dfa_history), 1):
     st.markdown(f"**{i}.** `{inp}` → {res}")
-    
-if st.button("Clear History", key = 'pulse'):
-    st.session_state.dfa_history = []
 
-if st.button("Go back", key = 'pulse2'):
-    st.switch_page("Home.py")
+
+col1, col2, col3, col4, col5 = st.columns([1, 2, 1, 2, 1])
+with col2:
+    if st.button("Clear History", key = 'pulse'):
+        st.session_state.dfa_history = []
+with col4:
+    if st.button("Go back", key = 'pulse2'):
+        st.switch_page("Home.py")
