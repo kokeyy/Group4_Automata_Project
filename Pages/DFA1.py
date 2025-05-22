@@ -162,7 +162,7 @@ for i, (inp, res) in enumerate(reversed(st.session_state.dfa_history), 1):
 if st.button("Clear History", key = 'pulse'):
     st.session_state.dfa_history = []
 
-image = Image.open("images/DFA1.png")
+image = Image.open("Images/DFA1.png")
 # Session state to remember toggle
 if "show_img" not in st.session_state:
     st.session_state.show_img = False
