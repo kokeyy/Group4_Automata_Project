@@ -156,7 +156,7 @@ if "show_img" not in st.session_state:
     st.session_state.show_img = False
 
 
-st.html("<h1 style = 'text-align: center;'>Other Langauges for this Regex </h1>")
+st.html("<h1 style = 'text-align: center;'>Other Formal Langauges for this Regex </h1>")
 
 with st.expander("CFG for this Regex"):
     st.markdown("""
