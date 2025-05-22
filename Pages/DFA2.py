@@ -154,6 +154,23 @@ if input_string:
 st.subheader("Full DFA Diagram")
 st.graphviz_chart(draw_dfa(dfa, edge_color=edge_color))
 
+st.html("<h1 style = 'text-align: center;'>Other Langauges for this Regex </h1>")
+
+with st.expander("CFG for this Regex"):
+    st.markdown("""
+S → X1 X2 X3 X4 X5 X6 X7 X8 X9
+
+X1 → a X1 | b X1 | λ  
+X2 → a a | b b  
+X3 → a a X3 | b b X3 | λ  
+X4 → a b | b a | a b a  
+X5 → b a b | a b a | b b b  
+X6 → a X6 | b X6 | b b X6 | a a X6 | λ  
+X7 → b b | a a | a b a  
+X8 → a a a | b a b | b b a  
+X9 → a a a X9 | b a b X9 | b b a X9 | λ
+    """)
+
 image = Image.open("Images/DFA2.png")
 # Session state to remember toggle
 if "show_img" not in st.session_state:
@@ -165,7 +182,7 @@ if st.button("Show/Hide PDA"):
 
 # Show the image if toggled on
 if st.session_state.show_img:
-    st.image(image, caption="Toggleable Image", use_column_width=True)
+    st.image(image, caption="PDA for this Regex", use_column_width=True)
 
 if st.button("Go back", key = 'pulse2'):
     st.switch_page("Home.py")
