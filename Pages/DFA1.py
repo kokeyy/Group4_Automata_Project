@@ -2,7 +2,7 @@ import streamlit as st
 import graphviz
 import time
 import pathlib
-
+from PIL import Image
 
 # Function to load CSS from the 'assets' folder
 def load_css(file_path):
@@ -161,6 +161,19 @@ for i, (inp, res) in enumerate(reversed(st.session_state.dfa_history), 1):
     
 if st.button("Clear History", key = 'pulse'):
     st.session_state.dfa_history = []
+
+image = Image.open("images/DFA1.png")
+# Session state to remember toggle
+if "show_img" not in st.session_state:
+    st.session_state.show_img = False
+
+# Button to toggle visibility
+if st.button("Show/Hide PDA"):
+    st.session_state.show_img = not st.session_state.show_img
+
+# Show the image if toggled on
+if st.session_state.show_img:
+    st.image(image, caption="Toggleable Image", use_column_width=True)
 
 if st.button("Go back", key = 'pulse2'):
     st.switch_page("Home.py")
