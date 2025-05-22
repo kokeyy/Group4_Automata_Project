@@ -124,7 +124,7 @@ st.html("<h1 style = 'text-align: center;'>1st DFA Visualizer </h1>")
 st.html("<p> For Regular Expression: (1+0)* (11 + 00 +101 + 010) (1+0)*(11+00+0+1)(1+0+11)(11+00)*(101+000+111)(1+0)*(101+000+111+001+100)(11+00+1+0)* </p>")
 active_color = st.color_picker("Pick a color for the active state highlight:", "#90ee90")
 edge_color = st.color_picker("Pick a color for the transition trail:", "#32CD32")
-input_string = st.text_input("Enter input string of 'a' and 'b':", key = 'styledinput')
+input_string = st.text_input("Enter input string of '1' and '0':", key = 'styledinput')
 
 if input_string:
     path, accepted, error = simulate_dfa(dfa, input_string)
