@@ -2,7 +2,8 @@ import streamlit as st
 import graphviz
 import time
 import pathlib
-""""
+
+
 # Function to load CSS from the 'assets' folder
 def load_css(file_path):
     with open(file_path) as f:
@@ -14,7 +15,7 @@ load_css(css_path)
 
 if "dfa_history" not in st.session_state:
     st.session_state.dfa_history = []
-"""
+
 
 # --- DFA Class ---
 class DFA:

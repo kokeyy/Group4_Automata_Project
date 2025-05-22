@@ -1,19 +1,20 @@
 /* Animated button with pulse effect */
 .st-key-pulse button {
-    background-color: #e5ff00;
+    background-color: #b3a100; /* Darker yellow */
     border-radius: 10px;
     padding: 20px 60px;
     animation: pulse 2s infinite;
+    font-family: 'Roboto', sans-serif;
 }
 
 .st-key-pulse button p {
     font-size: 24px;
-    font-family: 'Comic Sans MS', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 /* Hover effect for the button */
 .st-key-pulse button:hover {
-    background-color: #ffd900;
+    background-color: #8e7c00; /* Darker hover color */
     border: none;
 }
 
@@ -23,15 +24,13 @@
 
 /* Override the focus states to prevent default red border */
 .st-key-pulse button:focus {
-    background-color: #ffd900;
+    background-color: #5c5000;
     border: none;
 }
 
-/* Apply the same text color during focus states */
 .st-key-pulse button:focus p {
-    color: #ffd900;
+    color: #5c5000;
 }
-
 
 @keyframes pulse {
     0% {
@@ -47,20 +46,21 @@
 
 /* Animated button with pulse effect */
 .st-key-pulse2 button {
-    background-color: #e5ff00;
+    background-color: #b3a100;
     border-radius: 10px;
     padding: 20px 60px;
-    animation: pulse 2s infinite;
+    animation: pulse2 2s infinite;
+    font-family: 'Roboto', sans-serif;
 }
 
 .st-key-pulse2 button p {
     font-size: 24px;
-    font-family: 'Comic Sans MS', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 /* Hover effect for the button */
 .st-key-pulse2 button:hover {
-    background-color: #ffd900;
+    background-color: #8e7c00;
     border: none;
 }
 
@@ -70,15 +70,13 @@
 
 /* Override the focus states to prevent default red border */
 .st-key-pulse2 button:focus {
-    background-color: #ffd900; /* Keep the same as hover */
+    background-color: #5c5000;
     border: none;
 }
 
-/* Apply the same text color during focus states */
 .st-key-pulse2 button:focus p {
-    color: #ffd900;
+    color: #5c5000;
 }
-
 
 @keyframes pulse2 {
     0% {
@@ -101,3 +99,4 @@
 .st-key-styledinput input:focus {
     border: none;
 }
+
