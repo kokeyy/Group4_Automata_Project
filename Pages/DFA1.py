@@ -155,13 +155,31 @@ image = Image.open("Images/DFA1.png")
 if "show_img" not in st.session_state:
     st.session_state.show_img = False
 
+
+st.html("<h1 style = 'text-align: center;'>Other Langauges for this Regex </h1>")
+
+with st.expander("CFG for this Regex"):
+    st.markdown("""
+S → X1 X2 X3 X4 X5 X6 X7 X8 X9 X10
+
+X1 → 1 X1 | 0 X1 | λ  
+X2 → 1 1 | 0 0 | 1 0 1 | 0 1 0  
+X3 → 1 X3 | 0 X3 | λ  
+X4 → 1 1 | 0 0 | 0 | 1  
+X5 → 1 | 0 | 1 1  
+X6 → 1 1 X6 | 0 0 X6 | λ  
+X7 → 1 0 1 | 0 0 0 | 1 1 1  
+X8 → 1 X8 | 0 X8 | λ  
+X9 → 1 0 1 | 0 0 0 | 1 1 1 | 0 0 1 | 1 0 0  
+X10 → 1 1 X10 | 0 0 X10 | 1 X10 | 0 X10 | λ
+    """)
 # Button to toggle visibility
 if st.button("Show/Hide PDA"):
     st.session_state.show_img = not st.session_state.show_img
 
 # Show the image if toggled on
 if st.session_state.show_img:
-    st.image(image, caption="Toggleable Image", use_column_width=True)
+    st.image(image, caption="PDA for this Regex", use_column_width=True)
 
 if st.button("Go back", key = 'pulse2'):
     st.switch_page("Home.py")
