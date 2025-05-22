@@ -13,9 +13,6 @@ def load_css(file_path):
 css_path = pathlib.Path("assets/styles.css")
 load_css(css_path)
 
-if "dfa_history" not in st.session_state:
-    st.session_state.dfa_history = []
-
 # --- DFA Class ---
 class DFA:
     def __init__(self, states, alphabet, transition_function, start_state, accept_states):
@@ -134,13 +131,12 @@ if input_string:
 
     if error:
         st.error(error)
-        st.session_state.dfa_history.append((input_string, "❌ Error"))
     else:
         st.subheader("Step-by-step Simulation:")
         placeholder = st.empty()
         pointer_placeholder = st.empty()
         result = "✅ Accepted" if accepted else "❌ Rejected"
-        st.session_state.dfa_history.append((input_string, result))
+
 
         for i, (state, symbol) in enumerate(path):
             with placeholder.container():
@@ -157,13 +153,6 @@ if input_string:
 
 st.subheader("Full DFA Diagram")
 st.graphviz_chart(draw_dfa(dfa, edge_color=edge_color))
-st.subheader("Input History")
-
-for i, (inp, res) in enumerate(reversed(st.session_state.dfa_history), 1):
-    st.markdown(f"**{i}.** `{inp}` → {res}")
-    
-if st.button("Clear History", key = 'pulse'):
-    st.session_state.dfa_history = []
 
 image = Image.open("Images/DFA2.png")
 # Session state to remember toggle
