@@ -154,7 +154,7 @@ if input_string:
 st.subheader("Full DFA Diagram")
 st.graphviz_chart(draw_dfa(dfa, edge_color=edge_color))
 
-st.html("<h1 style = 'text-align: center;'>Other Langauges for this Regex </h1>")
+st.html("<h1 style = 'text-align: center;'>Other Formal Langauges for this Regex </h1>")
 
 with st.expander("CFG for this Regex"):
     st.markdown("""
