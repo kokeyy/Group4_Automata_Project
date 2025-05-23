@@ -173,19 +173,18 @@ st.html("<h1 style='text-align: center;'>Other Formal Languages for this Regex</
 
 with st.expander("CFG for this Regex"):
     st.markdown("""
-S → X1 X2 X3 X4 X5 X6 X7 X8 X9 X10
+S → A B C D E F G H I
 
-X1 → a X1 | b X1 | λ
-X2 → a a | b b
-X3 → a a X3 | b b X3 | λ
-X4 → a b | b a | a b a
-X5 → b a b | a b a | b b b
-X6 → a X6 | b X6 | λ
-X7 → b b | a a | a b a
-X8 → a a a | b a b | b b a
-X9 → a a a X9 | b a b X9 | b b a X9 | λ
-X10 → a a X10 | b b X10 | a X10 | b X10 | λ
-    """)
+A → a A | b A | λ
+B → a a | b b
+C → a a C | b b C | λ
+D → a b | b a | a b a
+E → b a b | a b a | b b b
+F → a F | b F | λ
+G → b b | a a | a b a
+H → a a a | b a b | b b a
+I → a a a I | b a b I | b b a I | λ
+""")
 
 if st.button("Show/Hide PDA"):
     st.session_state.show_img = not st.session_state.show_img
