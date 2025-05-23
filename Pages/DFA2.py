@@ -13,6 +13,14 @@ def load_css(file_path):
 css_path = pathlib.Path("assets/styles.css")
 load_css(css_path)
 
+# Initialize history in session state
+if "dfa_history" not in st.session_state:
+    st.session_state.dfa_history = []
+
+# Initialize image toggle state
+if "show_img" not in st.session_state:
+    st.session_state.show_img = False
+
 # --- DFA Class ---
 class DFA:
     def __init__(self, states, alphabet, transition_function, start_state, accept_states):
@@ -48,7 +56,7 @@ def simulate_dfa(dfa, input_string):
 
 def draw_dfa(dfa, path=[], active_state=None, active_color="lightgreen", edge_color="green"):
     dot = graphviz.Digraph(engine='dot')
-    dot.attr(rankdir='LR')  # Make layout horizontal
+    dot.attr(rankdir='LR')  # horizontal layout
     path_edges = set()
     visited_nodes = set()
 
@@ -61,9 +69,11 @@ def draw_dfa(dfa, path=[], active_state=None, active_color="lightgreen", edge_co
 
     for state in dfa.states:
         if state == active_state:
-            dot.node(state, shape="doublecircle" if state in dfa.accept_states else "circle", style="filled", color=active_color)
+            dot.node(state, shape="doublecircle" if state in dfa.accept_states else "circle",
+                     style="filled", color=active_color)
         elif state in visited_nodes:
-            dot.node(state, shape="doublecircle" if state in dfa.accept_states else "circle", style="filled", color="palegreen")
+            dot.node(state, shape="doublecircle" if state in dfa.accept_states else "circle",
+                     style="filled", color="palegreen")
         else:
             dot.node(state, shape="doublecircle" if state in dfa.accept_states else "circle")
 
@@ -95,7 +105,7 @@ dfa_letter = {
     'q6':{'a':'q7','b':'q8'},
     'q7':{'a':'q8','b':'q9'},
     'q8':{'a':'q10','b':'q11'},
-    'q9':{'a':'q12','b':'T' },
+    'q9':{'a':'q12','b':'T'},
     'q10':{'a':'T','b':'q12'},
     'q11':{'a':'q12','b':'q12'},
     'q12':{'a':'q13','b':'q14'},
@@ -103,12 +113,12 @@ dfa_letter = {
     'q14':{'a':'q12','b':'q16'},
     'q15':{'a':'q16','b':'q12'},
     'q16':{'a':'q17','b':'q18'},
-    'q17':{'a':'q19','b': 'T'},
-    'q18':{'a':'q20', 'b': 'q21'},
+    'q17':{'a':'q19','b':'T'},
+    'q18':{'a':'q20','b':'q21'},
     'q19':{'a':'q22','b':'T'},
     'q20':{'a':'T','b':'q22'},
     'q21':{'a':'q22','b':'T'},
-    'q22':{'a':'q22', 'b': 'q18'},
+    'q22':{'a':'q22','b':'q18'},
     'T':{'a':'T','b':'T'}
 }
 states = set(dfa_letter.keys())
@@ -119,24 +129,25 @@ accept_states = {'q22'}
 dfa = DFA(states, alphabet, dfa_letter, start_state, accept_states)
 
 # --- Streamlit Interface ---
-st.html("<h1 style = 'text-align: center;'>2nd DFA Visualizer </h1>")
-st.html("<p> For Regular Expression: (a+b)* (aa+bb) (aa+bb)* (ab+ba+aba) (bab+aba+bbb) (a+b+bb+aa)* (bb+aa+aba) (aaa+bab+bba) (aaa+bab+bba)* </p>")
+st.html("<h1 style='text-align: center;'>2nd DFA Visualizer</h1>")
+st.html("<p>For Regular Expression: (a+b)* (aa+bb) (aa+bb)* (ab+ba+aba) (bab+aba+bbb) (a+b+bb+aa)* (bb+aa+aba) (aaa+bab+bba) (aaa+bab+bba)*</p>")
 
 active_color = st.color_picker("Pick a color for the active state highlight:", "#90ee90")
 edge_color = st.color_picker("Pick a color for the transition trail:", "#32CD32")
-input_string = st.text_input("Enter input string of 'a' and 'b':", key = 'styledinput')
+input_string = st.text_input("Enter input string of 'a' and 'b':", key='styledinput')
 
 if input_string:
     path, accepted, error = simulate_dfa(dfa, input_string)
 
     if error:
         st.error(error)
+        st.session_state.dfa_history.append((input_string, "❌ Error"))
     else:
         st.subheader("Step-by-step Simulation:")
         placeholder = st.empty()
         pointer_placeholder = st.empty()
         result = "✅ Accepted" if accepted else "❌ Rejected"
-
+        st.session_state.dfa_history.append((input_string, result))
 
         for i, (state, symbol) in enumerate(path):
             with placeholder.container():
@@ -151,38 +162,42 @@ if input_string:
         else:
             st.error(f"❌ The string '{input_string}' is REJECTED.")
 
+# Full DFA Diagram
 st.subheader("Full DFA Diagram")
 st.graphviz_chart(draw_dfa(dfa, edge_color=edge_color))
 
-st.html("<h1 style = 'text-align: center;'>Other Formal Langauges for this Regex </h1>")
+# CFG and PDA Section
+image = Image.open("Images/DFA2.png")
+
+st.html("<h1 style='text-align: center;'>Other Formal Languages for this Regex</h1>")
 
 with st.expander("CFG for this Regex"):
     st.markdown("""
-S → X1 X2 X3 X4 X5 X6 X7 X8 X9
+S → X1 X2 X3 X4 X5 X6 X7 X8 X9 X10
 
-X1 → a X1 | b X1 | λ  
-X2 → a a | b b  
-X3 → a a X3 | b b X3 | λ  
-X4 → a b | b a | a b a  
-X5 → b a b | a b a | b b b  
-X6 → a X6 | b X6 | b b X6 | a a X6 | λ  
-X7 → b b | a a | a b a  
-X8 → a a a | b a b | b b a  
+X1 → a X1 | b X1 | λ
+X2 → a a | b b
+X3 → a a X3 | b b X3 | λ
+X4 → a b | b a | a b a
+X5 → b a b | a b a | b b b
+X6 → a X6 | b X6 | λ
+X7 → b b | a a | a b a
+X8 → a a a | b a b | b b a
 X9 → a a a X9 | b a b X9 | b b a X9 | λ
+X10 → a a X10 | b b X10 | a X10 | b X10 | λ
     """)
 
-image = Image.open("Images/DFA2.png")
-# Session state to remember toggle
-if "show_img" not in st.session_state:
-    st.session_state.show_img = False
-
-# Button to toggle visibility
 if st.button("Show/Hide PDA"):
     st.session_state.show_img = not st.session_state.show_img
 
-# Show the image if toggled on
 if st.session_state.show_img:
     st.image(image, caption="PDA for this Regex", use_column_width=True)
 
-if st.button("Go back", key = 'pulse2'):
+# Input History
+st.subheader("Input History")
+for i, (inp, res) in enumerate(reversed(st.session_state.dfa_history), 1):
+    st.markdown(f"**{i}.** {inp} → {res}")
+
+# Go Back Button
+if st.button("Go back", key='pulse2'):
     st.switch_page("Home.py")
