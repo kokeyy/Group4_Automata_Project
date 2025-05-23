@@ -165,18 +165,18 @@ st.html("<h1 style='text-align: center;'>Other Formal Languages for this Regex</
 
 with st.expander("CFG for this Regex"):
     st.markdown("""
-S → X1 X2 X3 X4 X5 X6 X7 X8 X9 X10
+S → A B C D E F G H I J
 
-X1 → 1 X1 | 0 X1 | λ  
-X2 → 1 1 | 0 0 | 1 0 1 | 0 1 0  
-X3 → 1 X3 | 0 X3 | λ  
-X4 → 1 1 | 0 0 | 0 | 1  
-X5 → 1 | 0 | 1 1  
-X6 → 1 1 X6 | 0 0 X6 | λ  
-X7 → 1 0 1 | 0 0 0 | 1 1 1  
-X8 → 1 X8 | 0 X8 | λ  
-X9 → 1 0 1 | 0 0 0 | 1 1 1 | 0 0 1 | 1 0 0  
-X10 → 1 1 X10 | 0 0 X10 | 1 X10 | 0 X10 | λ
+A → 1 A | 0 A | λ  
+B → 1 1 | 0 0 | 1 0 1 | 0 1 0  
+C → 1 C | 0 C | λ  
+D → 1 1 | 0 0 | 0 | 1  
+E → 1 | 0 | 1 1  
+F → 1 1 F | 0 0 F | λ  
+G → 1 0 1 | 0 0 0 | 1 1 1  
+H → 1 H | 0 H | λ  
+I → 1 0 1 | 0 0 0 | 1 1 1 | 0 0 1 | 1 0 0  
+J → 1 1 J | 0 0 J | 1 J | 0 J | λ
     """)
 
 if st.button("Show/Hide PDA"):
