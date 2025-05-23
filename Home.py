@@ -11,7 +11,7 @@ css_path = pathlib.Path("assets/styles.css")
 load_css(css_path)
 
 st.html("<h1 style = 'text-align: center;'> Group Project in Automata</h1>")
-st.html("<h2 style = 'text-align: center;'> By Group 4</h2>")
+st.html("<h2 style = 'text-align: center;'> By Group 6</h2>")
 
 col1, col2, col3, col4, col5 = st.columns([1, 2, 1, 2, 1])
 
